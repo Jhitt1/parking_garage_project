@@ -13,6 +13,9 @@ class Garage():
 
 
 tickets = []
+parkingSpaces = []
 for i in range(100):
     tickets.append(i + 1)
-garage = Garage(tickets, [], {})
+for i in range(100):
+    parkingSpaces.append(i + 1)
+garage = Garage(tickets, parkingSpaces, {})
