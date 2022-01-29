@@ -37,6 +37,29 @@ class Garage():
         else:
             input("\nThat payment is not acceptable. Please pay more $0.00.")
 # Justin section end
+# Jesses section start
+    def leaveGarage(self):
+        if self.currentTicket["paid"] == True:
+            print("\nThank you, have a nice day. ")
+            self.tickets.append(self.currentTicket["ticket_number"])
+            self.parkingSpaces.append(self.currentTicket["parking_space_number"])
+        else:
+            print("\nYou must pay before you can leave! ")  
+            try:
+                payment = float(input("\nHow much are you paying for your ticket?"))
+                payment = "{:.2f}".format(payment)
+            except:
+                input("\nThat is an invalid payment. Please try again. ")
+            if payment > 0:
+                self.currentTicket['paid'] = True
+                self.tickets.append(self.currentTicket["ticket_number"])
+                self.parkingSpaces.append(self.currentTicket["parking_space_number"])
+                input("\nThank you, have a nice day. ")
+            else:
+                input("\nThat payment is not acceptable. Please pay more $0.00.")
+# Jesse section ends
+                
+            
 
 
         
