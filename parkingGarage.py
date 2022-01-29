@@ -1,5 +1,5 @@
 import random
-from datetime import datetime
+from datetime import datetime #I copied this from Derek's code
 now = datetime.now()
 current_time = now.strftime("%H:%M:%S")
 
@@ -9,7 +9,8 @@ class Garage():
         self.tickets = tickets
         self.parkingSpaces = parkingSpaces
         self.currentTicket = currentTicket
-    
+
+# Jesse section start    
     def takeTicket(self):
         temp_ticket_number =  random.choice(self.tickets)
         self.currentTicket["ticket_number"] = temp_ticket_number
@@ -17,21 +18,34 @@ class Garage():
         temp_parkingSpaces = random.choice(self.parkingSpaces)
         self.currentTicket["parking_space_number"] = temp_parkingSpaces
         self.parkingSpaces.remove(temp_parkingSpaces)
-        inout("\nThe current time is " + current_time)
-        input("\nYour parking space is " + str(temp_parkingSpaces))
-        input("\nYour ticket number is " + str(temp_ticket_number))
-        input("\nPlease pay for your ticket once your ready to leave.")
+        input("\nThe current time is " + current_time + ". ")
+        input("\nYour parking space is " + str(temp_parkingSpaces) + ". ")
+        input("\nYour ticket number is " + str(temp_ticket_number) + ". ")
+        input("\nPlease pay for your ticket once your ready to leave. ")
+# Jesse secion end
 
-
-
-
+# Justin section start
     def payForParking(self):
-       payment =  input("\nHow much are you paying for your ticket?")
+        try:
+            payment = float(input("\nHow much are you paying for your ticket?"))
+            payment = "{:.2f}".format(payment) #I copied this from Derek's code
+        except:
+            input("\nThat is an invalid payment. Please try again. ")
+        if payment > 0:
+            self.currentTicket['paid'] = True
+            input("\nThank you for paying! Please leave in the next 15 minutes, or you will be charged. ")
+        else:
+            input("\nThat payment is not acceptable. Please pay more $0.00.")
+# Justin section end
+
+
+        
 
 
 
 
-# justin section start
+
+# Justin section start
 tickets = []
 parkingSpaces = []
 for i in range(100):
@@ -39,3 +53,4 @@ for i in range(100):
 for i in range(100):
     parkingSpaces.append(i + 1)
 garage = Garage(tickets, parkingSpaces, {})
+# Justin section end
