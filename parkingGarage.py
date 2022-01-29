@@ -5,10 +5,11 @@ current_time = now.strftime("%H:%M:%S")
 
 
 class Garage():
-    def __init__(self, tickets, parkingSpaces, currentTicket = {'ticket_number': 0, 'parking_space_number': 0, 'paid': False}):
+    def __init__(self, tickets, parkingSpaces, currentTicket = {'ticket_number': 0, 'parking_space_number': 0, 'paid': False}, leave = False):
         self.tickets = tickets
         self.parkingSpaces = parkingSpaces
         self.currentTicket = currentTicket
+        self.leave = leave
 
 # Jesse section start    
     def takeTicket(self):
@@ -28,7 +29,7 @@ class Garage():
     def payForParking(self):
         try:
             payment = float(input("\nHow much are you paying for your ticket?"))
-            payment = "{:.2f}".format(payment) #I copied this from Derek's code
+            payment = float("{:.2f}".format(payment)) #I copied this from Derek's code
         except:
             input("\nThat is an invalid payment. Please try again. ")
         if payment > 0:
@@ -37,36 +38,26 @@ class Garage():
         else:
             input("\nThat payment is not acceptable. Please pay more $0.00.")
 # Justin section end
-# Jesses section start
+
+#Jesse secion start
     def leaveGarage(self):
-        if self.currentTicket["paid"] == True:
-            print("\nThank you, have a nice day. ")
-            self.tickets.append(self.currentTicket["ticket_number"])
-            self.parkingSpaces.append(self.currentTicket["parking_space_number"])
-        else:
-            print("\nYou must pay before you can leave! ")  
+        if self.currentTicket['paid'] == False:
+            input("\nYou must pay before you can leave! ")  
             try:
-                payment = float(input("\nHow much are you paying for your ticket?"))
-                payment = "{:.2f}".format(payment)
+                payment = float(input("\nHow much are you paying for your ticket? "))
+                payment = float("{:.2f}".format(payment))
             except:
                 input("\nThat is an invalid payment. Please try again. ")
             if payment > 0:
                 self.currentTicket['paid'] = True
-                self.tickets.append(self.currentTicket["ticket_number"])
-                self.parkingSpaces.append(self.currentTicket["parking_space_number"])
-                input("\nThank you, have a nice day. ")
             else:
                 input("\nThat payment is not acceptable. Please pay more $0.00.")
-# Jesse section ends
-                
-            
-
-
-        
-
-
-
-
+        if self.currentTicket['paid'] == True:
+            self.tickets.append(self.currentTicket["ticket_number"])
+            self.parkingSpaces.append(self.currentTicket["parking_space_number"])
+            input("\nThank you, have a nice day. ")
+            self.leave = True
+# Jesse section end
 
 # Justin section start
 tickets = []
@@ -75,5 +66,24 @@ for i in range(100):
     tickets.append(i + 1)
 for i in range(100):
     parkingSpaces.append(i + 1)
-garage = Garage(tickets, parkingSpaces, {})
+garage = Garage(tickets, parkingSpaces)
+# Justin section end
+
+# Justin section start
+garage.takeTicket()
+while garage.leave == False:
+    choice = input("""What would you like to do in the garage?
+    ----------------
+    •"Pay"
+    ----------------
+    •"Leave"
+    ----------------
+    """).lower()
+    if choice == 'pay':
+        if garage.currentTicket['paid'] == False:
+            garage.payForParking()
+        else:
+            input("\nYou've already paid. Please leave before 15 minutes after the time you paid. ")
+    elif choice == 'leave':
+        garage.leaveGarage()
 # Justin section end
