@@ -42,3 +42,15 @@ When the project is completed, commit the final changes, sync all pull requests,
 
 ###### List group responsiblities below:
 ###### Provide name and approxamite line numbers where each person wrote their code
+Justin and Jesse together: defined initial Garage class
+
+Jesse:
+takeTicket: Lines 15-25
+leaveGarage: Lines 43-59
+
+Justin:
+payforParking: Lines 29-39
+creating initial lists: Lines 63-69
+while loops: Lines 73-88
+
+By instruction, we both worked together the entire time, these are simply the ones we typed.
